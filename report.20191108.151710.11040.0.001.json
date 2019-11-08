@@ -1,0 +1,313 @@
+
+{
+  "header": {
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20191108.151710.11040.0.001.json",
+    "dumpEventTime": "2019-11-08T15:17:10Z",
+    "dumpEventTimeStamp": "1573237030599",
+    "processId": 11040,
+    "cwd": "C:\\Projetos\\novatimbaubafm",
+    "commandLine": [
+      "node",
+      "C:\\Projetos\\novatimbaubafm\\node_modules\\react-native\\scripts\\..\\cli.js",
+      "start"
+    ],
+    "nodejsVersion": "v12.4.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.4.0",
+      "v8": "7.4.288.27-node.18",
+      "uv": "1.29.1",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "72",
+      "nghttp2": "1.38.0",
+      "napi": "4",
+      "llhttp": "1.1.3",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1b",
+      "cldr": "35.1",
+      "icu": "64.2",
+      "tz": "2019a",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v12.4.0/node-v12.4.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.4.0/node-v12.4.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.4.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "host": "ROMARIO-PC"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff6adfd64a9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6adfd9d94",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6adfd8db8",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae0c256b",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae3fa56e",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae3ce5ea",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae464a3c",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae46c7bf",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae462e23",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae461524",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae4a9e23",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae497a52",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae3ce9d0",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6ae7f8177",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff6aec64196",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 109813760,
+    "totalCommittedMemory": 109813760,
+    "usedMemory": 100075024,
+    "availableMemory": 2098406816,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 524288,
+        "committedMemory": 524288,
+        "capacity": 523976,
+        "used": 31712,
+        "available": 492264
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047952,
+        "used": 1047944,
+        "available": 8
+      },
+      "old_space": {
+        "memorySize": 90824704,
+        "committedMemory": 90824704,
+        "capacity": 90615912,
+        "used": 83361208,
+        "available": 7254704
+      },
+      "code_space": {
+        "memorySize": 1212416,
+        "committedMemory": 1212416,
+        "capacity": 1150688,
+        "used": 774400,
+        "available": 376288
+      },
+      "map_space": {
+        "memorySize": 2625536,
+        "committedMemory": 2625536,
+        "capacity": 2623424,
+        "used": 1389360,
+        "available": 1234064
+      },
+      "large_object_space": {
+        "memorySize": 13529088,
+        "committedMemory": 13529088,
+        "capacity": 13466944,
+        "used": 13466944,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 3456,
+        "used": 3456,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047952,
+        "used": 0,
+        "available": 1047952
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 25.953,
+    "kernelCpuSeconds": 11.828,
+    "cpuConsumptionPercent": 2.33938,
+    "maxRss": 211996672,
+    "pageFaults": {
+      "IORequired": 202317,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 2934,
+      "writes": 46
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Projetos\\novatimbaubafm",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "ANDROID_HOME": "C:\\Android\\SDK",
+    "APPDATA": "C:\\Users\\Usuario\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "132114650276980270",
+    "ChocolateyToolsLocation": "C:\\tools",
+    "CLASSPATH": ".;",
+    "COLORTERM": "truecolor",
+    "COMMONPROGRAMFILES": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "ROMARIO-PC",
+    "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+    "DART_SDK": "C:\\Program Files\\Dart\\dart-sdk",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "EXEPATH": "C:\\Program Files\\Git\\bin",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOME": "C:\\Users\\Usuario",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\Usuario",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk1.8.0_211",
+    "LANG": "pt_BR.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\Usuario\\AppData\\Local",
+    "LOGONSERVER": "\\\\ROMARIO-PC",
+    "MSYSTEM": "MINGW64",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\Usuario\\OneDrive",
+    "OS": "Windows_NT",
+    "PATH": "C:\\Projetos\\novatimbaubafm\\node_modules\\react-native\\scripts\\node_modules\\.bin;C:\\Projetos\\novatimbaubafm\\node_modules\\react-native\\node_modules\\.bin;C:\\Projetos\\novatimbaubafm\\node_modules\\node_modules\\.bin;C:\\Projetos\\novatimbaubafm\\node_modules\\.bin;C:\\Projetos\\node_modules\\.bin;C:\\node_modules\\.bin;C:\\Program Files\\nodejs;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Users\\Usuario\\bin;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Python27;C:\\Python27\\Scripts;C:\\Program Files (x86)\\Embarcadero\\Studio\\20.0\\bin;C:\\Users\\Public\\Documents\\Embarcadero\\Studio\\20.0\\Bpl;C:\\Program Files (x86)\\Embarcadero\\Studio\\20.0\\bin64;C:\\Users\\Public\\Documents\\Embarcadero\\Studio\\20.0\\Bpl\\Win64;C:\\Program Files (x86)\\Embarcadero\\Studio\\17.0\\bin;C:\\Users\\Public\\Documents\\Embarcadero\\Studio\\17.0\\Bpl;C:\\Program Files (x86)\\Embarcadero\\Studio\\17.0\\bin64;C:\\Users\\Public\\Documents\\Embarcadero\\Studio\\17.0\\Bpl\\Win64;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0;C:\\WINDOWS\\System32\\OpenSSH;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files\\Git\\cmd;C:\\php;C:\\Composer;C:\\Program Files\\Firebird\\Firebird_2_5\\bin;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\nodejs;C:\\Program Files\\Java\\jdk1.8.0_211\\bin;C:\\Android\\SDK\\platform-tools;C:\\Android\\SDK\\tools;C:\\Program Files\\SlikSvn\\bin;C:\\Program Files\\WinRAR;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit;C:\\Program Files\\Dart\\dart-sdk\\bin;C:\\Program Files (x86)\\Firebird\\Firebird_2_0\\bin;C:\\Program Files (x86)\\Yarn\\bin;C:\\Users\\Usuario\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\Usuario\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\Usuario\\AppData\\Roaming\\npm;C:\\Program Files\\OpenVPN\\bin;C:\\tools\\dart-sdk\\bin;C:\\Users\\Usuario\\AppData\\Roaming\\Pub\\Cache\\bin;C:\\Users\\Usuario\\AppData\\Roaming\\Composer\\vendor\\bin;C:\\Users\\Usuario\\AppData\\Local\\Yarn\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
+    "PLINK_PROTOCOL": "ssh",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 60 Stepping 3, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "3c03",
+    "ProgramData": "C:\\ProgramData",
+    "PROGRAMFILES": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "PWD": "C:/Projetos/novatimbaubafm",
+    "RCT_METRO_PORT": "8081",
+    "SESSIONNAME": "Console",
+    "SHLVL": "2",
+    "SYSTEMDRIVE": "C:",
+    "SYSTEMROOT": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\Usuario\\AppData\\Local\\Temp",
+    "TERM": "cygwin",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.40.0",
+    "TMP": "C:\\Users\\Usuario\\AppData\\Local\\Temp",
+    "USERDOMAIN": "ROMARIO-PC",
+    "USERDOMAIN_ROAMINGPROFILE": "ROMARIO-PC",
+    "USERNAME": "Usuario",
+    "USERPROFILE": "C:\\Users\\Usuario",
+    "VBOX_MSI_INSTALL_PATH": "C:\\Program Files\\Oracle\\VirtualBox\\",
+    "VBOX_USER_HOME": "C:\\Users\\Usuario\\.VirtualBox",
+    "VS140COMNTOOLS": "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools\\",
+    "WINDIR": "C:\\WINDOWS",
+    "_": "C:/Program Files/nodejs/node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\System32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\winmmbase.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\System32\\UMPDC.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\system32\\wshbth.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\WINDOWS\\System32\\fwpuclnt.dll"
+  ]
+}

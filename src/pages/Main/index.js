@@ -7,11 +7,15 @@ import {
     View,
     StatusBar,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    DeviceEventEmitter,
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LivePlayer } from "react-native-live-stream"
+import PushNotification from 'react-native-push-notification'
+import PushNotificationAndroid from 'react-native-push-notification'
+
 
 const Main = ({navigation}) => {
 
@@ -21,8 +25,30 @@ const Main = ({navigation}) => {
     const player = useRef(null)
 
     useEffect(()=> {
-        console.log('didMount')
+
+          PushNotification.configure({
+
+            onNotification: function(notification) {
+                console.log("NOTIFICATION:", notification.action);
+                if (notification.action == 'Stop') {
+                    //PushNotification.cancelAllLocalNotifications()
+					setStop(true)
+                } else if (notification.action == 'Play') {
+					setStop(false)
+				}
+            },
+            
+            popInitialNotification: true,
+
+            requestPermissions: true,
+          })
     }, [])
+	
+	useEffect(()=> {
+        if (stoped == true) {
+            PushNotification.cancelAllLocalNotifications()
+        }
+	}, [stoped])
 
     const btnControlPress = () => {
         if (stoped) {
@@ -30,10 +56,26 @@ const Main = ({navigation}) => {
             setStop(!stoped)
             setTimeout(()=> {
                 setLoading(false)
+                notificar()
             },2000)
         } else {
             setStop(!stoped)
         }
+    }
+
+    const notificar = () => {
+        console.log('notificar')
+
+        
+        PushNotification.localNotification({
+            id: '63',
+            title: "Nova Timbaúba FM", // (optional)
+            message: "96,9", // (required)
+            vibrate: false,
+            playSound: false,
+            actions: '["Play", "Stop"]',
+            ongoing: true,
+        });
     }
 
     return (
