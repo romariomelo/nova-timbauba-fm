@@ -75,6 +75,8 @@ const Main = ({navigation}) => {
             playSound: false,
             actions: '["Play", "Stop"]',
             ongoing: true,
+            largeIcon: "icon",
+            smallIcon: "icon",
         });
     }
 
