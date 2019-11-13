@@ -8,19 +8,36 @@ import {
     StatusBar,
     TouchableOpacity,
     ActivityIndicator,
-    DeviceEventEmitter,
+    ToastAndroid,
+    Text,
+    Linking
 } from 'react-native'
 
+import Modal from 'react-native-modal';
+import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { LivePlayer } from "react-native-live-stream"
-import PushNotification from 'react-native-push-notification'
-import PushNotificationAndroid from 'react-native-push-notification'
+import { LivePlayer } from "react-native-live-stream";
+import PushNotification from 'react-native-push-notification';
+import axios from 'axios';
+import NetInfo from "@react-native-community/netinfo";
+import { is } from '@babel/types';
+
+const primaryColor = "#9fbb32";
+const secondaryColor = "#001d7e";
 
 
-const Main = ({navigation}) => {
+const Main = () => {
 
     const [stoped, setStop] = useState(true)
     const [loading, setLoading] = useState(false)
+    const [server, setServer] = useState("")
+    const [modalVisible, setModalVisible] = useState(false);
+    const [appInfo, setAppInfo] = useState({
+        "telefone": "8136311193",
+        "whatsapp": "5581989562717"
+    });
+
+    const remoteAppConfig = "http://novatimbaubafm.com/app.json";
 
     const player = useRef(null)
 
@@ -28,56 +45,121 @@ const Main = ({navigation}) => {
 
           PushNotification.configure({
 
-            onNotification: function(notification) {
-                console.log("NOTIFICATION:", notification.action);
-                if (notification.action == 'Stop') {
-                    //PushNotification.cancelAllLocalNotifications()
-					setStop(true)
-                } else if (notification.action == 'Play') {
-					setStop(false)
-				}
+            onNotification: (notification) => {
+                if (notification.action == '⏹️ Stop') {
+					setStop(true);
+                }
             },
             
             popInitialNotification: true,
 
             requestPermissions: true,
           })
+
+          asyncOnStart();
     }, [])
 	
 	useEffect(()=> {
-        if (stoped == true) {
-            PushNotification.cancelAllLocalNotifications()
-        }
-	}, [stoped])
+        onStopedChange();
+    }, [stoped]);
 
-    const btnControlPress = () => {
-        if (stoped) {
-            setLoading(true)
-            setStop(!stoped)
-            setTimeout(()=> {
-                setLoading(false)
-                notificar()
-            },2000)
+    const onStopedChange = async () => {
+        if (stoped == true) {
+            PushNotification.cancelAllLocalNotifications();
         } else {
-            setStop(!stoped)
+            let _isConnected = await isConnected();
+            if (!_isConnected) {
+                ToastAndroid.show('Verifique sua conexão com a internet. Por favor conecte-se a internet para ouvir.', ToastAndroid.LONG);
+                setStop(true);
+            } else {
+                getServer();
+                notificar();
+            }
         }
     }
 
-    const notificar = () => {
-        console.log('notificar')
+    const asyncOnStart = async () => {
+        let _isConnected = await isConnected();
+          if (!_isConnected) {
+            ToastAndroid.show('Verifique sua conexão com a internet. Por favor conecte-se a internet para ouvir.', ToastAndroid.LONG);
+          } else {
+            getAppInfo();
+          }
+    }
 
-        
+    const isConnected = async () => {
+        let retorno;
+        await NetInfo.getConnectionInfo().then((connectionInfo) => {
+            if (["wifi", "cellular", "ethernet"].indexOf( connectionInfo.type ) === -1) {
+                retorno = false;
+            } else {
+                retorno = true;
+            }
+        });
+        return retorno;
+    }
+
+    const getAppInfo = async () => {
+        try {
+            const response = await axios.get(remoteAppConfig, {headers: {
+                "Cache-Control": "no-cache"
+            }});
+
+            if (response.status == 200) {
+                setAppInfo(response.data);
+            }
+
+        } catch (err) {
+            ToastAndroid.show("E01: Sem conexão.", ToastAndroid.SHORT);
+        }
+
+    }
+
+    const btnControlPress = () => {
+        if (stoped) {
+            setLoading(true);
+            setStop(!stoped);
+            setTimeout(()=> {
+                setLoading(false);
+            },2000);
+        } else {
+            setStop(!stoped);
+        }
+    }
+
+    const notificar = () => {        
         PushNotification.localNotification({
             id: '63',
             title: "Nova Timbaúba FM", // (optional)
             message: "96,9", // (required)
             vibrate: false,
             playSound: false,
-            actions: '["Play", "Stop"]',
+            actions: '["⏹️ Stop"]',
             ongoing: true,
             largeIcon: "icon",
             smallIcon: "icon",
         });
+    }
+
+    const getServer = async (ultServer = null) => {
+        try {
+            const api = await axios.get( remoteAppConfig );
+
+            if ( ultServer == null ) {
+                setServer(api.data.servers[0]);
+            } else {
+                len = api.data.servers.length;
+                if ( len > ultServer + 1  ) {
+                    setServer( api.data.servers[ultServer + 1] );
+                } else {
+                    console.log("Não há mais servidores");
+                }
+
+            }
+        } catch (err) {
+            setStop(true);
+            console.warn("E02: " + err);
+        }
     }
 
     return (
@@ -87,6 +169,12 @@ const Main = ({navigation}) => {
             <ImageBackground
                 source={require('../../assets/background.png')}
                 style={{width:"100%", height: "100%"}}>
+                    <TouchableOpacity
+                        style={styles.btnInfo}
+                        onPress={() => {setModalVisible(true)}}>
+                        <Icon name="info" size={32} color="#333" style={styles.btnInfos} />
+                    </TouchableOpacity>
+                    
                     <View style={styles.container}>
                     <Image 
                         source={require('../../assets/logo-label.png')}
@@ -122,31 +210,58 @@ const Main = ({navigation}) => {
 
                 { 
                     (!stoped) ?
-                        <LivePlayer source={{uri:"http://radio.novatimbaubafm.com:8204/live"}}
+                        <LivePlayer source={{uri:server}}
                             ref={player}
                             paused={false}
                             muted={false}
                             bufferTime={500}
                             maxBufferTime={1000}
                             resizeMode={"contain"}
-                            onLoading={()=>{console.log("OnLoading")}}
-                            onLoad={()=>{console.log("OnLoad")}}
-                            onEnd={()=>{console.log("OnEnd")}}
-                            onProgress={() => {console.log("OnProgress")}}
                         /> :
                         null
                 }
                 
             </View>
         </View>
+        <Modal
+          isVisible={modalVisible}
+          style={styles.modal}
+          onBackdropPress={()=>{setModalVisible(false)}}
+          swipeDirection={['down']}
+          onSwipeComplete={()=>{setModalVisible(false)}}>
+          <View style={styles.viewModal}>
+              <TouchableOpacity
+                onPress={()=> {setModalVisible(false)}}>
+                  <Text style={styles.textFecharModal}><Icon name="close" size={18} color="#9fbb32" style={styles.btnPlay} /> Fechar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {Linking.openURL("http://www.novatimbaubafm.com")}}>
+              <Text style={styles.textModal}><Image source={require("../../assets/world-icon.png")} style={{width: 18, height: 18}} /> Acesse nosso site</Text>
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+
+              <TouchableOpacity
+                onPress={() => {Linking.openURL(`whatsapp://send?phone=${appInfo.whatsapp}`)}}>
+              <Text style={styles.textModal}><Image source={require("../../assets/whatsapp-icon.png")} style={{width: 18, height: 18}} /> Envie-nos uma mensagem</Text>
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+
+              <TouchableOpacity
+                onPress={() => {Linking.openURL(`tel:${appInfo.telefone}`)}}>
+              <Text style={styles.textModal}><Image source={require("../../assets/phone-icon.png")} style={{width: 18, height: 18}} /> Fale conosco</Text>
+              </TouchableOpacity>
+              <View style={styles.divider}></View>
+
+
+              <TouchableOpacity
+                style={{marginTop: 100}}
+                onPress={() => {Linking.openURL("http://www.romariomelo.com")}}>
+              <Text style={styles.textModalCredit}>Desenvolvido por: <Image source={require("../../assets/logo-rm.png")} style={{width: 30, height: 18}} /> Romário Melo</Text>
+              </TouchableOpacity>
+          </View>
+        </Modal>
     </View>
     )
-}
-
-Main.navigationOptions = () => {
-    return {
-        drawerLabel: 'Nova Timbaúba FM'
-    }
 }
 
 const styles = StyleSheet.create({
@@ -163,17 +278,23 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     control: {
-        backgroundColor: "#9fbb32",
+        backgroundColor: primaryColor,
         width: "100%",
         height: 100,
         position: "absolute",
         bottom: 0
         
     },
+    btnInfo: {
+        alignSelf: "flex-end",
+        position: "absolute",
+        padding: 15,
+
+    },
     btnContainer: {
         width: 126,
         height: 126,
-        backgroundColor: "blue",
+        backgroundColor: secondaryColor,
         borderRadius: 63,
         alignItems: "center"
     },
@@ -185,6 +306,41 @@ const styles = StyleSheet.create({
     },
     loader: {
         marginTop: 43
+    },
+    modal: {
+        justifyContent: 'flex-end',
+        margin: 0,
+    },
+    viewModal: {
+        marginTop: 22,
+        backgroundColor: "#fff",
+        padding:15,
+        borderTopColor: primaryColor,
+        borderTopWidth: 5
+    },
+    textFecharModal: {
+        fontSize: 18,
+        alignSelf: "flex-end",
+        marginRight: 20,
+        color: primaryColor
+    },
+    textModal: {
+        fontSize: 18,
+        marginLeft: 10,
+        marginTop: 10,
+        marginBottom: 10
+    },
+    textModalCredit: {
+        fontSize: 14,
+        alignSelf: "center",
+    },
+    divider: {
+        borderColor: "#DDD",
+        borderWidth: 1,
+        marginTop: 5,
+        marginBottom: 5,
+        marginLeft: 25,
+        marginRight: 25
     }
 })
 

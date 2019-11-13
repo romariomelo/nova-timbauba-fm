@@ -10,10 +10,13 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/netinfo": "^4.6.0",
+    "axios": "^0.19.0",
     "react": "16.9.0",
     "react-native": "0.61.4",
     "react-native-gesture-handler": "^1.5.0",
     "react-native-live-stream": "^1.0.1",
+    "react-native-modal": "^11.5.3",
     "react-native-push-notification": "^3.1.9",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^1.0.0-alpha.23",

@@ -1,14 +1,13 @@
-import { createAppContainer } from 'react-navigation'
-import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 
 
 import Main from './pages/Main'
 
-const Drawer = createDrawerNavigator({
+const SwitchNavigator = createSwitchNavigator({
     Main
 })
 
 
-const Routes = createAppContainer(Drawer)
+const Routes = createAppContainer(SwitchNavigator)
 
 export default Routes
