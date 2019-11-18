@@ -17,10 +17,9 @@ import Modal from 'react-native-modal';
 import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LivePlayer } from "react-native-live-stream";
-import PushNotification from 'react-native-push-notification';
 import axios from 'axios';
 import NetInfo from "@react-native-community/netinfo";
-import { is } from '@babel/types';
+import MusicControl from 'react-native-music-control';
 
 const primaryColor = "#9fbb32";
 const secondaryColor = "#001d7e";
@@ -42,20 +41,6 @@ const Main = () => {
     const player = useRef(null)
 
     useEffect(()=> {
-
-          PushNotification.configure({
-
-            onNotification: (notification) => {
-                if (notification.action == '⏹️ Stop') {
-					setStop(true);
-                }
-            },
-            
-            popInitialNotification: true,
-
-            requestPermissions: true,
-          })
-
           asyncOnStart();
     }, [])
 	
@@ -65,7 +50,7 @@ const Main = () => {
 
     const onStopedChange = async () => {
         if (stoped == true) {
-            PushNotification.cancelAllLocalNotifications();
+            MusicControl.resetNowPlaying();
         } else {
             let _isConnected = await isConnected();
             if (!_isConnected) {
@@ -128,17 +113,24 @@ const Main = () => {
     }
 
     const notificar = () => {        
-        PushNotification.localNotification({
-            id: '63',
-            title: "Nova Timbaúba FM", // (optional)
-            message: "96,9", // (required)
-            vibrate: false,
-            playSound: false,
-            actions: '["⏹️ Stop"]',
-            ongoing: true,
-            largeIcon: "icon",
-            smallIcon: "icon",
+        MusicControl.enableControl('stop', true);
+        MusicControl.enableControl('closeNotification', true, {when: 'never'});
+        MusicControl.setNowPlaying({
+            title: 'Nova Timbaúba FM',
+            artwork: require("../../assets/logo-draw.png"), //'https://i.imgur.com/e1cpwdo.png', // URL or RN's image require()
+            //artist: 'Michael Jackson',
+            //album: '96,9MHz',
+            //genre: 'Post-disco, Rhythm and Blues, Funk, Dance-pop',
+            //duration: 294, // (Seconds)
+            //description: '96,9', // Android Only
+            color: 0x001d7e, // Notification Color - Android Only
+            //date: '1983-01-02T00:00:00Z', // Release Date (RFC 3339) - Android Only
+            //rating: 84, // Android Only (Boolean or Number depending on the type)
+            notificationIcon: 'icon' // Android Only (String), Android Drawable resource name for a custom notification icon
         });
+          MusicControl.on('stop', ()=> {
+            setStop(true);
+          })
     }
 
     const getServer = async (ultServer = null) => {
