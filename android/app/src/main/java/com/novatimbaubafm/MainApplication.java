@@ -1,4 +1,4 @@
-package com.novatimbaubafm;
+package com.novatimbaubafm.novatimbaubafm;
 
 import android.app.Application;
 import android.content.Context;

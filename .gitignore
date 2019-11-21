@@ -61,3 +61,5 @@ buck-out/
 
 #Yarn
 yarn.lock
+
+android/gradle.properties

@@ -1,4 +1,4 @@
-package com.novatimbaubafm;
+package com.novatimbaubafm.novatimbaubafm;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -951,13 +951,6 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-4.6.0.tgz#fc0b79a226da78371158f885a2f798ff07c926be"
   integrity sha512-wz39BUpExDU1kTpLlBkDwwb0Efg+uuwixToosTSarZgpzG/CmcRvWdD786TMiE5tLDd+Mpi2xh3w4FrVM8zjoA==
 
-"@react-native-community/push-notification-ios@^1.0.1":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.0.2.tgz#541bc8ce088d726c4a98fff0e261b4d0f555cacf"
-  integrity sha512-9lWaw+zBGvT8Yw9HZmiLkYbnmF5AzrWexYh2qmRt/shpfZawCTPmPBrq09N7JhiPV4g/gEbeLXlndxl1JQeB0g==
-  dependencies:
-    invariant "^2.2.4"
-
 "@react-navigation/core@^3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.5.1.tgz#7a2339fca3496979305fb3a8ab88c2ca8d8c214d"
@@ -5384,13 +5377,6 @@ react-native-music-control@^0.10.7:
   version "0.10.7"
   resolved "https://registry.yarnpkg.com/react-native-music-control/-/react-native-music-control-0.10.7.tgz#6a88679671b94ab7e4be9afc00766ff10ab50b7d"
   integrity sha512-4bxrPD4T10DDL05MpavEkktr37ejRt1ArFXMJ/jI2zsO+XXeZsOkAU45tEKCcwKgLmle/HmdK3BDodR3lvnX8A==
-
-react-native-push-notification@^3.1.9:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.1.9.tgz#760ee06e743fef74fc9fcb672dac40794fdc4c47"
-  integrity sha512-YpEg9AYBjNgJtHRgHKR0xPB7kk3Gj0uSjUxd0feOIvd7wrfR+zeiBM4NZonGmjlAG6thaE37dfAG5qcsONFM7w==
-  dependencies:
-    "@react-native-community/push-notification-ios" "^1.0.1"
 
 react-native-reanimated@^1.4.0:
   version "1.4.0"

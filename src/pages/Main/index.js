@@ -41,8 +41,13 @@ const Main = () => {
     const player = useRef(null)
 
     useEffect(()=> {
-          asyncOnStart();
-    }, [])
+        asyncOnStart();
+
+        return function cleanup() {
+            MusicControl.stopControl();
+        }
+    }, []);
+
 	
 	useEffect(()=> {
         onStopedChange();
@@ -103,34 +108,29 @@ const Main = () => {
     const btnControlPress = () => {
         if (stoped) {
             setLoading(true);
-            setStop(!stoped);
+            setStop(false);
             setTimeout(()=> {
                 setLoading(false);
             },2000);
         } else {
-            setStop(!stoped);
+            setStop(true);
         }
     }
 
     const notificar = () => {        
         MusicControl.enableControl('stop', true);
         MusicControl.enableControl('closeNotification', true, {when: 'never'});
+        MusicControl.enableBackgroundMode(true);
         MusicControl.setNowPlaying({
             title: 'Nova Timbaúba FM',
-            artwork: require("../../assets/logo-draw.png"), //'https://i.imgur.com/e1cpwdo.png', // URL or RN's image require()
-            //artist: 'Michael Jackson',
-            //album: '96,9MHz',
-            //genre: 'Post-disco, Rhythm and Blues, Funk, Dance-pop',
-            //duration: 294, // (Seconds)
-            //description: '96,9', // Android Only
-            color: 0x001d7e, // Notification Color - Android Only
-            //date: '1983-01-02T00:00:00Z', // Release Date (RFC 3339) - Android Only
-            //rating: 84, // Android Only (Boolean or Number depending on the type)
-            notificationIcon: 'icon' // Android Only (String), Android Drawable resource name for a custom notification icon
+            artwork: require("../../assets/logo-draw.png"),
+            color: 0x333333,
+            notificationIcon: 'icon'
         });
-          MusicControl.on('stop', ()=> {
+
+        MusicControl.on('stop', ()=> {
             setStop(true);
-          })
+        });
     }
 
     const getServer = async (ultServer = null) => {
@@ -198,21 +198,13 @@ const Main = () => {
                             <Icon name="stop" size={110} color="#fff" style={styles.btnStop} />
                         </TouchableOpacity>
                 }
-
-
-                { 
-                    (!stoped) ?
                         <LivePlayer source={{uri:server}}
                             ref={player}
-                            paused={false}
+                            paused={stoped}
                             muted={false}
-                            bufferTime={500}
-                            maxBufferTime={1000}
-                            resizeMode={"contain"}
-                        /> :
-                        null
-                }
-                
+                            bufferTime={1000}
+                            maxBufferTime={1500}
+                            resizeMode={"contain"}/>
             </View>
         </View>
         <Modal
