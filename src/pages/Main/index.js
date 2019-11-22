@@ -10,7 +10,8 @@ import {
     ActivityIndicator,
     ToastAndroid,
     Text,
-    Linking
+    Linking,
+    BackHandler
 } from 'react-native'
 
 import Modal from 'react-native-modal';
@@ -35,13 +36,36 @@ const Main = () => {
         "telefone": "8136311193",
         "whatsapp": "5581989562717"
     });
+    const [time, setTime] = useState(0);
 
     const remoteAppConfig = "http://novatimbaubafm.com/app.json";
 
-    const player = useRef(null)
+    const player = useRef(null);
+
+    const bh = BackHandler.addEventListener("hardwareBackPress", () => {
+        console.log("bh");
+        console.log(stoped);
+        let _date = new Date();
+        const _time = _date.getTime();
+
+        console.log(time - _time);
+        if ((time - _time) < 2000 ) {
+            console.log("Sair");
+        } else {
+            console.log("ficar");
+        }
+        return true;
+    });
 
     useEffect(()=> {
         asyncOnStart();
+
+        NetInfo.addEventListener(state => {
+            if (!state.isInternetReachable) {
+                setStop(true);
+                ToastAndroid.show("Verifique sua conexão com a internet.", ToastAndroid.SHORT);
+            }
+        });
 
         return function cleanup() {
             MusicControl.stopControl();
