@@ -79,7 +79,7 @@ const Main = () => {
 
     const onStopedChange = async () => {
         if (stoped == true) {
-            MusicControl.resetNowPlaying();
+            MusicControl.stopControl();
         } else {
             let _isConnected = await isConnected();
             if (!_isConnected) {
@@ -250,7 +250,7 @@ const Main = () => {
 
               <TouchableOpacity
                 onPress={() => {Linking.openURL(`whatsapp://send?phone=${appInfo.whatsapp}`)}}>
-              <Text style={styles.textModal}><Image source={require("../../assets/whatsapp-icon.png")} style={{width: 18, height: 18}} /> Envie-nos uma mensagem</Text>
+              <Text style={styles.textModal}><Image source={require("../../assets/whatsapp-icon.png")} style={{width: 18, height: 18}} /> Participe da nossa programação</Text>
               </TouchableOpacity>
               <View style={styles.divider}></View>
 
