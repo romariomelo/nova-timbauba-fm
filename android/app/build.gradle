@@ -75,6 +75,9 @@ import com.android.build.OutputFile
  * ]
  */
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 project.ext.react = [
     entryFile: "index.js",
     enableHermes: false,  // clean and rebuild if changing
@@ -137,8 +140,8 @@ android {
         applicationId "com.novatimbaubafm.novatimbaubafm"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "2.0"
+        versionCode 8
+        versionName "2.0.2"
     }
     splits {
         abi {
@@ -158,10 +161,10 @@ android {
 
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword MYAPP_UPLOAD_STORE_PASSWORD
-                keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+                storeFile file( properties.getProperty('keystore.file') )
+                storePassword properties.getProperty('keystore.storepass')
+                keyAlias properties.getProperty('keystore.alias')
+                keyPassword properties.getProperty('keystore.keypass')
             }
         }
 
