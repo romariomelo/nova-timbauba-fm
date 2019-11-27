@@ -42,20 +42,22 @@ const Main = () => {
 
     const player = useRef(null);
 
-    const bh = BackHandler.addEventListener("hardwareBackPress", () => {
-        console.log("bh");
-        console.log(stoped);
-        let _date = new Date();
-        const _time = _date.getTime();
 
-        console.log(time - _time);
-        if ((time - _time) < 2000 ) {
-            console.log("Sair");
-        } else {
-            console.log("ficar");
+    const sair = () => {
+        const oldTime = time;
+
+        let _timeDiff = new Date().getTime() - oldTime;
+
+        setTime(new Date().getTime());
+        
+        if (_timeDiff > 2000 ) {
+
+            ToastAndroid.show("Pressione novamente para sair.", ToastAndroid.SHORT);
+            return true;
+
         }
-        return true;
-    });
+        return false;
+    }
 
     useEffect(()=> {
         asyncOnStart();
@@ -71,6 +73,18 @@ const Main = () => {
             MusicControl.stopControl();
         }
     }, []);
+
+    useEffect(() => {
+        const bh = BackHandler.addEventListener("hardwareBackPress", () => {
+
+            return sair();
+            
+        });
+
+        return () => {
+            bh.remove();
+        }
+    }, [time]);
 
 	
 	useEffect(()=> {
