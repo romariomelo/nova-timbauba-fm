@@ -79,7 +79,6 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 project.ext.react = [
-    entryFile: "index.js",
     enableHermes: false,  // clean and rebuild if changing
 ]
 
@@ -160,13 +159,16 @@ android {
         }
 
         release {
+            /*
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file( properties.getProperty('keystore.file') )
                 storePassword properties.getProperty('keystore.storepass')
                 keyAlias properties.getProperty('keystore.alias')
                 keyPassword properties.getProperty('keystore.keypass')
             }
+            */
         }
+        
 
     }
     buildTypes {
@@ -177,7 +179,7 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -191,7 +193,7 @@ android {
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
-                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+                        defaultConfig.versionCode * 1000 + versionCodes.get(abi)
             }
 
         }
