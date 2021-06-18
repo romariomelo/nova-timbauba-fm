@@ -41,6 +41,10 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
   },
+  imgIcon: {
+    width: 18,
+    height: 18,
+  },
 });
 
 export default styles;

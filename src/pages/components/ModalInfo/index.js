@@ -3,6 +3,7 @@ import {View, TouchableOpacity, Text, Linking, Image} from 'react-native';
 import Modal from 'react-native-modal';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ItemMenu from './ItemMenu';
 
 const ModalInfo = ({setModalVisible, modalVisible, appInfo}) => {
   //const [modalVisible, setModalVisible] = React.useState(isVisible);
@@ -33,52 +34,64 @@ const ModalInfo = ({setModalVisible, modalVisible, appInfo}) => {
             Fechar
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            Linking.openURL('http://www.novatimbaubafm.com');
-          }}>
-          <Text style={styles.textModal}>
-            <Image
-              source={require('../../../assets/world-icon.png')}
-              style={{width: 18, height: 18}}
-            />{' '}
-            Acesse nosso site
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.divider} />
 
-        <TouchableOpacity
+        <ItemMenu
+          onPress={() => Linking.openURL('http://www.novatimbaubafm.com')}
+          title="Acesse nosso site">
+          <Image
+            source={require('../../../assets/world-icon.png')}
+            style={styles.imgIcon}
+          />
+        </ItemMenu>
+
+        <ItemMenu
           onPress={() => {
             Linking.openURL(`whatsapp://send?phone=${appInfo.whatsapp}`);
-          }}>
-          <Text style={styles.textModal}>
-            <Image
-              source={require('../../../assets/whatsapp-icon.png')}
-              style={{width: 18, height: 18}}
-            />{' '}
-            Participe da nossa programação
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.divider} />
+          }}
+          title="Participe da nossa programação">
+          <Image
+            source={require('../../../assets/whatsapp-icon.png')}
+            style={styles.imgIcon}
+          />
+        </ItemMenu>
 
-        <TouchableOpacity
+        <ItemMenu
+          onPress={() => {
+            Linking.openURL(`${appInfo.social.instagram.url}`);
+          }}
+          title="Instagram">
+          <Image
+            source={require('../../../assets/social/instagram_96x96.png')}
+            style={styles.imgIcon}
+          />
+        </ItemMenu>
+
+        <ItemMenu
+          onPress={() => {
+            Linking.openURL(`${appInfo.social.facebook.url}`);
+          }}
+          title="Facebook">
+          <Image
+            source={require('../../../assets/social/facebook_96x96.png')}
+            style={styles.imgIcon}
+          />
+        </ItemMenu>
+
+        <ItemMenu
+          title="Fale Conosco"
           onPress={() => {
             Linking.openURL(`tel:${appInfo.telefone}`);
           }}>
-          <Text style={styles.textModal}>
-            <Image
-              source={require('../../../assets/phone-icon.png')}
-              style={{width: 18, height: 18}}
-            />{' '}
-            Fale conosco
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.divider} />
+          <Image
+            source={require('../../../assets/phone-icon.png')}
+            style={styles.imgIcon}
+          />
+        </ItemMenu>
 
         <TouchableOpacity
           style={{marginTop: 100}}
           onPress={() => {
-            Linking.openURL('http://www.romariomelo.com');
+            Linking.openURL(appInfo.creditos.url);
           }}>
           <Text style={styles.textModalCredit}>
             Desenvolvido por:{' '}
