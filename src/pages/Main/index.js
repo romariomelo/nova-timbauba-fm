@@ -19,6 +19,7 @@ import axios from 'axios';
 import NetInfo from '@react-native-community/netinfo';
 import MusicControl from 'react-native-music-control';
 import ModalInfo from '../components/ModalInfo';
+import getMessage from '../../helpers/messages';
 
 const primaryColor = '#9fbb32';
 const secondaryColor = '#001d7e';
@@ -46,7 +47,10 @@ const Main = () => {
     setTime(new Date().getTime());
 
     if (_timeDiff > 2000) {
-      ToastAndroid.show('Pressione novamente para sair.', ToastAndroid.SHORT);
+      ToastAndroid.show(
+        getMessage('press_to_exit').message,
+        ToastAndroid.SHORT,
+      );
       return true;
     }
     return false;
@@ -59,7 +63,7 @@ const Main = () => {
       if (!state.isInternetReachable) {
         setStop(true);
         ToastAndroid.show(
-          'Verifique sua conexão com a internet.',
+          getMessage('check_your_connection').message,
           ToastAndroid.SHORT,
         );
       }
@@ -91,7 +95,7 @@ const Main = () => {
       let _isConnected = await isConnected();
       if (!_isConnected) {
         ToastAndroid.show(
-          'Verifique sua conexão com a internet. Por favor conecte-se a internet para ouvir.',
+          getMessage('connect_to_listen').message,
           ToastAndroid.LONG,
         );
         setStop(true);
@@ -106,7 +110,7 @@ const Main = () => {
     let _isConnected = await isConnected();
     if (!_isConnected) {
       ToastAndroid.show(
-        'Verifique sua conexão com a internet. Por favor conecte-se a internet para ouvir.',
+        getMessage('connect_to_listen').message,
         ToastAndroid.LONG,
       );
     } else {
@@ -139,7 +143,10 @@ const Main = () => {
         setAppInfo(response.data);
       }
     } catch (err) {
-      ToastAndroid.show('E01: Sem conexão.', ToastAndroid.SHORT);
+      ToastAndroid.show(
+        getMessage('no_connection').message,
+        ToastAndroid.SHORT,
+      );
     }
   };
 
@@ -178,11 +185,15 @@ const Main = () => {
       if (ultServer == null) {
         setServer(api.data.servers[0]);
       } else {
-        len = api.data.servers.length;
+        let len = api.data.servers.length;
         if (len > ultServer + 1) {
           setServer(api.data.servers[ultServer + 1]);
         } else {
-          console.log('Não há mais servidores');
+          ToastAndroid.show(
+            getMessage('connectionless_servers').message,
+            ToastAndroid.LONG,
+          );
+          setStop(true);
         }
       }
     } catch (err) {
