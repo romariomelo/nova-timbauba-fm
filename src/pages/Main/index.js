@@ -2,7 +2,6 @@ import React, {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   ImageBackground,
-  StyleSheet,
   Image,
   View,
   StatusBar,
@@ -20,6 +19,8 @@ import NetInfo from '@react-native-community/netinfo';
 import MusicControl from 'react-native-music-control';
 import ModalInfo from '../components/ModalInfo';
 import getMessage from '../../helpers/messages';
+import styles from './styles';
+import TopBar from '../components/TopBar';
 
 const primaryColor = '#9fbb32';
 const secondaryColor = '#001d7e';
@@ -139,7 +140,7 @@ const Main = () => {
         },
       });
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         setAppInfo(response.data);
       }
     } catch (err) {
@@ -208,24 +209,17 @@ const Main = () => {
       <SafeAreaView>
         <ImageBackground
           source={require('../../assets/background.png')}
-          style={{width: '100%', height: '100%'}}>
-          <TouchableOpacity
-            style={styles.btnInfo}
-            onPress={() => {
-              setModalVisible(true);
-            }}>
-            <Icon name="info" size={32} color="#333" style={styles.btnInfos} />
-          </TouchableOpacity>
-
+          style={styles.imageBackground}>
+          <TopBar setModalVisible={setModalVisible} appInfo={appInfo} />
           <View style={styles.container}>
             <Image
               source={require('../../assets/logo-label.png')}
-              style={{width: '60%', resizeMode: 'contain', marginBottom: -100}}
+              style={styles.logoLabel}
             />
 
             <Image
               source={require('../../assets/logo-draw.png')}
-              style={{width: '30%', resizeMode: 'contain'}}
+              style={styles.logoDraw}
             />
           </View>
         </ImageBackground>
@@ -277,83 +271,5 @@ const Main = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    height: '100%',
-  },
-  controlContainer: {
-    width: '100%',
-    height: 150,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    alignItems: 'center',
-  },
-  control: {
-    backgroundColor: primaryColor,
-    width: '100%',
-    height: 100,
-    position: 'absolute',
-    bottom: 0,
-  },
-  btnInfo: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    padding: 15,
-  },
-  btnContainer: {
-    width: 126,
-    height: 126,
-    backgroundColor: secondaryColor,
-    borderRadius: 63,
-    alignItems: 'center',
-  },
-  btnStop: {
-    marginTop: 8,
-  },
-  btnPlay: {
-    marginTop: 6,
-  },
-  loader: {
-    marginTop: 43,
-  },
-  modal: {
-    justifyContent: 'flex-end',
-    margin: 0,
-  },
-  viewModal: {
-    marginTop: 22,
-    backgroundColor: '#fff',
-    padding: 15,
-    borderTopColor: primaryColor,
-    borderTopWidth: 5,
-  },
-  textFecharModal: {
-    fontSize: 18,
-    alignSelf: 'flex-end',
-    marginRight: 20,
-    color: primaryColor,
-  },
-  textModal: {
-    fontSize: 18,
-    marginLeft: 10,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  textModalCredit: {
-    fontSize: 14,
-    alignSelf: 'center',
-  },
-  divider: {
-    borderColor: '#DDD',
-    borderWidth: 1,
-    marginTop: 5,
-    marginBottom: 5,
-    marginLeft: 25,
-    marginRight: 25,
-  },
-});
 
 export default Main;

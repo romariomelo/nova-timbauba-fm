@@ -88,8 +88,10 @@ const ModalInfo = ({setModalVisible, modalVisible, appInfo}) => {
           />
         </ItemMenu>
 
+        <Text style={styles.versionText}>v2.0.3</Text>
+
         <TouchableOpacity
-          style={{marginTop: 100}}
+          style={styles.creditosText}
           onPress={() => {
             Linking.openURL(appInfo.creditos.url);
           }}>
@@ -97,7 +99,7 @@ const ModalInfo = ({setModalVisible, modalVisible, appInfo}) => {
             Desenvolvido por:{' '}
             <Image
               source={require('../../../assets/logo-rm.png')}
-              style={{width: 30, height: 18}}
+              style={styles.creditosImg}
             />{' '}
             Romário Melo
           </Text>

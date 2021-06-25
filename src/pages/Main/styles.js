@@ -1,10 +1,52 @@
 import {StyleSheet} from 'react-native';
 
 const primaryColor = '#9fbb32';
+const secondaryColor = '#001d7e';
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    height: '100%',
+  },
+  logoLabel: {
+    width: '60%',
+    resizeMode: 'contain',
+    marginBottom: -100,
+  },
+  logoDraw: {
+    width: '30%',
+    resizeMode: 'contain',
+  },
+  controlContainer: {
+    width: '100%',
+    height: 150,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    alignItems: 'center',
+  },
+  control: {
+    backgroundColor: primaryColor,
+    width: '100%',
+    height: 100,
+    position: 'absolute',
+    bottom: 0,
+  },
+  btnContainer: {
+    width: 126,
+    height: 126,
+    backgroundColor: secondaryColor,
+    borderRadius: 63,
+    alignItems: 'center',
+  },
+  btnStop: {
+    marginTop: 8,
+  },
   btnPlay: {
     marginTop: 6,
+  },
+  loader: {
+    marginTop: 43,
   },
   modal: {
     justifyContent: 'flex-end',
@@ -41,19 +83,9 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
   },
-  imgIcon: {
-    width: 18,
-    height: 18,
-  },
-  versionText: {
-    textAlign: 'center',
-  },
-  creditosText: {
-    marginTop: 100,
-  },
-  creditosImg: {
-    width: 30,
-    height: 18,
+  imageBackground: {
+    width: '100%',
+    height: '100%',
   },
 });
 
