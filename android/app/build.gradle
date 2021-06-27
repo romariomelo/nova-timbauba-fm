@@ -139,8 +139,8 @@ android {
         applicationId "com.novatimbaubafm.novatimbaubafm"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "2.0.2"
+        versionCode 7
+        versionName "2.0.3"
     }
     splits {
         abi {
@@ -159,14 +159,10 @@ android {
         }
 
         release {
-            /*
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file( properties.getProperty('keystore.file') )
-                storePassword properties.getProperty('keystore.storepass')
-                keyAlias properties.getProperty('keystore.alias')
-                keyPassword properties.getProperty('keystore.keypass')
-            }
-            */
+            storeFile file( properties.getProperty('keystore.file') )
+            storePassword properties.getProperty('keystore.storepass')
+            keyAlias properties.getProperty('keystore.alias')
+            keyPassword properties.getProperty('keystore.keypass')
         }
         
 
@@ -178,8 +174,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
